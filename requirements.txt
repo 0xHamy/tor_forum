@@ -1,2 +1,4 @@
 flask==2.3.3
 gunicorn==21.2.0
+flask-sqlalchemy==3.0.5
+faker==20.0.0

@@ -15,8 +15,8 @@
             {% for post in posts %}
             <tr>
                 <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
-                <td>{{ post.category }}</td>
-                <td>{{ post.date }}</td>
+                <td>{{ post.category.name }}</td>
+                <td>{{ post.date.strftime('%Y-%m-%d %H:%M') }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -25,7 +25,7 @@
     <div class="content has-text-white">
         <ul>
             {% for member in members %}
-            <li>{{ member.username }} (Joined: {{ member.join_date }})</li>
+            <li>{{ member.username }} (Joined: {{ member.join_date.strftime('%Y-%m-%d') }})</li>
             {% endfor %}
         </ul>
     </div>

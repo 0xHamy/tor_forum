@@ -2,11 +2,42 @@
 {% block title %}Marketplace{% endblock %}
 {% block content %}
     <h1 class="title has-text-success">Marketplace</h1>
-    <h2 class="subtitle has-text-white">Sections</h2>
-    <div class="content has-text-white">
-        <ul>
-            <li><a class="has-text-info" href="{{ url_for('buyers') }}">Buyers</a> - Browse requests from buyers seeking access or services.</li>
-            <li><a class="has-text-info" href="{{ url_for('sellers') }}">Sellers</a> - View offerings from sellers (access, tools, data).</li>
-        </ul>
-    </div>
+    <h2 class="subtitle has-text-white">Top 10 Buyers Posts</h2>
+    <table class="table is-fullwidth is-striped is-dark has-text-white">
+        <thead>
+            <tr>
+                <th class="has-text-white">Title</th>
+                <th class="has-text-white">Category</th>
+                <th class="has-text-white">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in buyer_posts %}
+            <tr>
+                <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
+                <td>{{ post.category.name }}</td>
+                <td>{{ post.date.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2 class="subtitle has-text-white">Top 10 Sellers Posts</h2>
+    <table class="table is-fullwidth is-striped is-dark has-text-white">
+        <thead>
+            <tr>
+                <th class="has-text-white">Title</th>
+                <th class="has-text-white">Category</th>
+                <th class="has-text-white">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in seller_posts %}
+            <tr>
+                <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
+                <td>{{ post.category.name }}</td>
+                <td>{{ post.date.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

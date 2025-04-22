@@ -6,23 +6,24 @@
         <div class="card-content has-text-white">
             <div class="content">
                 <p>{{ post.content }}</p>
-                <p><strong>Date:</strong> {{ post.date }}</p>
+                <p><strong>Date:</strong> {{ post.date.strftime('%Y-%m-%d %H:%M') }}</p>
             </div>
         </div>
     </div>
     <div class="card is-dark">
-        <header class="card-header">
-            <p class="card-header-title has-text-success">Poster: {{ post.poster }}</p>
+        <header class="card-header has-background-dark">
+            <p class="card-header-title has-text-success">Poster: {{ post.author.username }}</p>
         </header>
         <div class="card-content has-text-white">
             <div class="content">
-                <p>Member since: Simulated Date</p>
-                <p>Reputation: High (simulated)</p>
+                <p><strong>Member since:</strong> {{ post.author.join_date.strftime('%Y-%m-%d') }}</p>
+                <p><strong>Reputation:</strong> {{ post.author.reputation }}</p>
+                <p><strong>Bio:</strong> {{ post.author.bio }}</p>
             </div>
         </div>
     </div>
     <div class="card is-dark">
-        <header class="card-header">
+        <header class="card-header has-background-dark">
             <p class="card-header-title has-text-success">Comments</p>
         </header>
         <div class="card-content has-text-white">
@@ -30,8 +31,8 @@
                 {% if post.comments %}
                 {% for comment in post.comments %}
                 <div class="content">
-                    <p>{{ comment }}</p>
-                    <p><small>By: Anonymous (simulated)</small></p>
+                    <p>{{ comment.content }}</p>
+                    <p><small>By: {{ comment.author.username }} on {{ comment.date.strftime('%Y-%m-%d %H:%M') }}</small></p>
                 </div>
                 {% endfor %}
                 {% else %}
