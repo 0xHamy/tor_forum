@@ -2,16 +2,22 @@
 <html>
 <head>
     <title>{% block title %}{% endblock %} - Darknet Forum</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/bulma.min.css') }}">
 </head>
-<body>
-    <div class="navbar">
-        <a href="{{ url_for('index') }}">General</a>
-        <a href="{{ url_for('marketplace') }}">Marketplace</a>
-    </div>
-    <div class="container">
-        {% block content %}
-        {% endblock %}
-    </div>
+<body class="has-background-dark">
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item has-text-white" href="{{ url_for('index') }}">General</a>
+                <a class="navbar-item has-text-white" href="{{ url_for('marketplace') }}">Marketplace</a>
+            </div>
+        </div>
+    </nav>
+    <section class="section has-background-dark">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </section>
 </body>
 </html>

@@ -1,26 +1,32 @@
 {% extends 'base.html' %}
 {% block title %}General{% endblock %}
 {% block content %}
-    <h1>Darknet Forum</h1>
-    <h2>Latest Posts</h2>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Date</th>
-        </tr>
-        {% for post in posts %}
-        <tr>
-            <td><a href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
-            <td>{{ post.category }}</td>
-            <td>{{ post.date }}</td>
-        </tr>
-        {% endfor %}
+    <h1 class="title has-text-success">Darknet Forum</h1>
+    <h2 class="subtitle has-text-white">Latest Posts</h2>
+    <table class="table is-fullwidth is-striped is-dark has-text-white">
+        <thead>
+            <tr>
+                <th class="has-text-white">Title</th>
+                <th class="has-text-white">Category</th>
+                <th class="has-text-white">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
+                <td>{{ post.category }}</td>
+                <td>{{ post.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-    <h2>Newest Members</h2>
-    <ul>
-        {% for member in members %}
-        <li>{{ member.username }} (Joined: {{ member.join_date }})</li>
-        {% endfor %}
-    </ul>
+    <h2 class="subtitle has-text-white">Newest Members</h2>
+    <div class="content has-text-white">
+        <ul>
+            {% for member in members %}
+            <li>{{ member.username }} (Joined: {{ member.join_date }})</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

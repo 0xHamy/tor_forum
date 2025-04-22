@@ -1,27 +1,43 @@
 {% extends 'base.html' %}
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
-    <h1>{{ post.title }}</h1>
-    <div class="post-content">
-        <p>{{ post.content }}</p>
-        <p><strong>Date:</strong> {{ post.date }}</p>
-    </div>
-    <div class="profile">
-        <h2>Poster: {{ post.poster }}</h2>
-        <p>Member since: Simulated Date</p>
-        <p>Reputation: High (simulated)</p>
-    </div>
-    <div class="comments">
-        <h2>Comments</h2>
-        {% if post.comments %}
-        {% for comment in post.comments %}
-        <div class="comment">
-            <p>{{ comment }}</p>
-            <p><small>By: Anonymous (simulated)</small></p>
+    <h1 class="title has-text-success">{{ post.title }}</h1>
+    <div class="card is-dark">
+        <div class="card-content has-text-white">
+            <div class="content">
+                <p>{{ post.content }}</p>
+                <p><strong>Date:</strong> {{ post.date }}</p>
+            </div>
         </div>
-        {% endfor %}
-        {% else %}
-        <p>No comments yet.</p>
-        {% endif %}
+    </div>
+    <div class="card is-dark">
+        <header class="card-header">
+            <p class="card-header-title has-text-success">Poster: {{ post.poster }}</p>
+        </header>
+        <div class="card-content has-text-white">
+            <div class="content">
+                <p>Member since: Simulated Date</p>
+                <p>Reputation: High (simulated)</p>
+            </div>
+        </div>
+    </div>
+    <div class="card is-dark">
+        <header class="card-header">
+            <p class="card-header-title has-text-success">Comments</p>
+        </header>
+        <div class="card-content has-text-white">
+            <div class="content">
+                {% if post.comments %}
+                {% for comment in post.comments %}
+                <div class="content">
+                    <p>{{ comment }}</p>
+                    <p><small>By: Anonymous (simulated)</small></p>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>No comments yet.</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 {% endblock %}
