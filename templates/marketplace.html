@@ -1,6 +1,30 @@
 {% extends 'base.html' %}
 {% block title %}Marketplace{% endblock %}
 {% block content %}
+    <style>
+        .table th:nth-child(1), .table td:nth-child(1) {
+            width: 50%; /* Title column */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .table th:nth-child(2), .table td:nth-child(2) {
+            width: 30%; /* Category column */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .table th:nth-child(3), .table td:nth-child(3) {
+            width: 20%; /* Date column */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .table {
+            table-layout: fixed; /* Ensures fixed column widths */
+        }
+    </style>
+
     <h1 class="title has-text-success">Marketplace</h1>
     <div class="is-flex is-flex-direction-column">
         <div class="mb-5">
@@ -12,42 +36,48 @@
             <p class="content has-text-white is-size-7 mt-2">Sellers offer access, tools, or data, including RDP credentials, account dumps, or leaked databases.</p>
         </div>
     </div>
+
     <h2 class="subtitle has-text-white mt-5">Top 10 Buyers Posts</h2>
-    <table class="table is-fullwidth is-striped is-dark has-text-white">
-        <thead>
-            <tr>
-                <th class="has-text-white">Title</th>
-                <th class="has-text-white">Category</th>
-                <th class="has-text-white">Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for post in buyer_posts %}
-            <tr>
-                <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
-                <td>{{ post.category.name }}</td>
-                <td>{{ post.date.strftime('%Y-%m-%d %H:%M') }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table class="table is-fullwidth is-striped is-dark has-text-white">
+            <thead>
+                <tr>
+                    <th class="has-text-white">Title</th>
+                    <th class="has-text-white">Category</th>
+                    <th class="has-text-white">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in buyer_posts %}
+                <tr>
+                    <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
+                    <td>{{ post.category.name }}</td>
+                    <td>{{ post.date.strftime('%Y-%m-%d %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
     <h2 class="subtitle has-text-white mt-5">Top 10 Sellers Posts</h2>
-    <table class="table is-fullwidth is-striped is-dark has-text-white">
-        <thead>
-            <tr>
-                <th class="has-text-white">Title</th>
-                <th class="has-text-white">Category</th>
-                <th class="has-text-white">Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for post in seller_posts %}
-            <tr>
-                <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
-                <td>{{ post.category.name }}</td>
-                <td>{{ post.date.strftime('%Y-%m-%d %H:%M') }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table class="table is-fullwidth is-striped is-dark has-text-white">
+            <thead>
+                <tr>
+                    <th class="has-text-white">Title</th>
+                    <th class="has-text-white">Category</th>
+                    <th class="has-text-white">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in seller_posts %}
+                <tr>
+                    <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
+                    <td>{{ post.category.name }}</td>
+                    <td>{{ post.date.strftime('%Y-%m-%d %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

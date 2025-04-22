@@ -1,32 +1,72 @@
 {% extends 'base.html' %}
 {% block title %}General{% endblock %}
 {% block content %}
+    <style>
+        .table th:nth-child(1), .table td:nth-child(1) {
+            width: 50%; /* Title or Username column */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .table th:nth-child(2), .table td:nth-child(2) {
+            width: 30%; /* Category or empty column */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .table th:nth-child(3), .table td:nth-child(3) {
+            width: 20%; /* Date or Join Date column */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .table {
+            table-layout: fixed; /* Ensures fixed column widths */
+        }
+    </style>
+
     <h1 class="title has-text-success">Darknet Forum</h1>
     <h2 class="subtitle has-text-white">Latest Posts</h2>
-    <table class="table is-fullwidth is-striped is-dark has-text-white">
-        <thead>
-            <tr>
-                <th class="has-text-white">Title</th>
-                <th class="has-text-white">Category</th>
-                <th class="has-text-white">Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for post in posts %}
-            <tr>
-                <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
-                <td>{{ post.category.name }}</td>
-                <td>{{ post.date.strftime('%Y-%m-%d %H:%M') }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-container">
+        <table class="table is-fullwidth is-striped is-dark has-text-white">
+            <thead>
+                <tr>
+                    <th class="has-text-white">Title</th>
+                    <th class="has-text-white">Category</th>
+                    <th class="has-text-white">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                <tr>
+                    <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
+                    <td>{{ post.category.name }}</td>
+                    <td>{{ post.date.strftime('%Y-%m-%d %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
     <h2 class="subtitle has-text-white">Newest Members</h2>
-    <div class="content has-text-white">
-        <ul>
-            {% for member in members %}
-            <li>{{ member.username }} (Joined: {{ member.join_date.strftime('%Y-%m-%d') }})</li>
-            {% endfor %}
-        </ul>
+    <div class="table-container">
+        <table class="table is-fullwidth is-striped is-dark has-text-white">
+            <thead>
+                <tr>
+                    <th class="has-text-white">Username</th>
+                    <th class="has-text-white"></th> <!-- Empty column to match Latest Posts table -->
+                    <th class="has-text-white">Join Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for member in members %}
+                <tr>
+                    <td><a class="has-text-info" href="{{ url_for('profile', user_id=member.id) }}" target="_blank">{{ member.username }}</a></td>
+                    <td></td> <!-- Empty cell to align with Latest Posts table -->
+                    <td>{{ member.join_date.strftime('%Y-%m-%d') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

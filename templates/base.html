@@ -3,6 +3,19 @@
 <head>
     <title>{% block title %}{% endblock %} - Darknet Forum</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/bulma.min.css') }}">
+    <style>
+        /* Ensure body and html cover full viewport with gray background */
+        html, body {
+            height: 100%;
+            margin: 0;
+            background-color: #363636;
+        }
+        /* Make section stretch to at least viewport height */
+        .section {
+            min-height: calc(100vh - 3.25rem);
+            background-color: #363636; 
+        }
+    </style>
 </head>
 <body class="has-background-grey-dark has-text-white">
     <nav class="navbar is-dark" role="navigation" aria-label="main navigation">

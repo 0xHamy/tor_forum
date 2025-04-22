@@ -8,11 +8,11 @@ fake = Faker()
 
 # Helper to generate random dates in Jan-Mar 2025
 def random_date():
-    start = datetime(2025, 1, 1)
-    end = datetime(2025, 3, 31)
+    start = datetime(2025, 1, 1, 0, 0, 0)
+    end = datetime(2025, 3, 31, 23, 59, 59) 
     delta = end - start
-    random_days = random.randrange(delta.days)
-    return start + timedelta(days=random_days)
+    random_seconds = random.randrange(int(delta.total_seconds()))
+    return start + timedelta(seconds=random_seconds)
 
 # Clear existing data
 with app.app_context():
@@ -114,7 +114,7 @@ posts = [
     {"title": "Spotify Premium Accounts", "content": "200 Spotify accounts, $3 each, bulk deals.", "type": "seller", "category": "Account Sales"},
     {"title": "Need Help with Phishing", "content": "Setting up a phishing campaign, need templates. $100 XMR.", "type": "buyer", "category": "Help Request"},
     {"title": "Leaked University DB", "content": "10k student records from US university. $200 XMR.", "type": "seller", "category": "Data Leaks"},
-    {"title": "[Royal Bank Canada (RBC)] Limited SMB Access for sale", "content": "I have got limited read/write access to a SMB share of RBC bank Canada, Halton Hills branch. The access is limited so I am selling for $1000, original price was $3000, I will give you a Ubuntu VPS with from where you can access the SMB share. Serious buyers only, LTC & XMR accepted.", "type": "seller", "category": "Initial Access"},
+    {"title": "[Royal Bank Canada (RBC)] Limited SMB Access for sale", "content": "I have got limited read/write access to a SMB share of RBC bank Canada, Halton Hills branch. The access is limited so I am selling for $1000, original price was $3000, I will give you a Ubuntu VPS with from where you can access the SMB share. Serious buyers only, LTC & XMR accepted.", "type": "seller", "category": "General"},
     {"title": "Seeking Botnet Rental", "content": "Need botnet for testing, budget $50/day.", "type": "buyer", "category": "General"},
     {"title": "Custom Malware for Sale", "content": "RAT with advanced features, $500 BTC.", "type": "seller", "category": "General"},
     {"title": "Hacked Social Media Accounts", "content": "100+ Instagram accounts, $8 each.", "type": "seller", "category": "Account Sales"},
