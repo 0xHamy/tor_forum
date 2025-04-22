@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}General{% endblock %}
+{% block content %}
+    <h1>Darknet Forum</h1>
+    <h2>Latest Posts</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Date</th>
+        </tr>
+        {% for post in posts %}
+        <tr>
+            <td><a href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
+            <td>{{ post.category }}</td>
+            <td>{{ post.date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Newest Members</h2>
+    <ul>
+        {% for member in members %}
+        <li>{{ member.username }} (Joined: {{ member.join_date }})</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
