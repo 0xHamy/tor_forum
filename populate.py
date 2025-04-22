@@ -61,10 +61,37 @@ with app.app_context():
 
 # Create posts
 posts = [
-    {"title": "RDP Access - US Corporate Servers", "content": "Fresh RDP access to US corporate servers. High uptime, admin privileges. $300 BTC.", "type": "seller", "category": "Initial Access"},
-    {"title": "Need Help with SQL Injection", "content": "Struggling with SQLi on a target site. Anyone got tips or tools? Willing to pay $50 XMR.", "type": "buyer", "category": "Help Request"},
-    {"title": "AWS Admin Keys - Full Access", "content": "Selling AWS keys with full admin access. Serious buyers only, $800 BTC.", "type": "seller", "category": "Initial Access"},
-    {"title": "General Discussion: OpSec Tips", "content": "Sharing my OpSec setup: VPN + Tor + burner devices. What's your approach?", "type": "seller", "category": "General"},
+    {
+        "title": "[$6,200] RDP Access - Citibank US Branch Compromised",
+        "content": "Yo, got something big. Fresh RDP into Citibank, some branch in New York area, not gonna drop exact deets for OPSEC. This is domain admin level, you basically own their network. Uptime 99.8%, tested for weeks, no flags. Perfect for pulling data, dropping payloads, or whatever you fancy. Price is $6,200 XMR, firm—ain’t no charity here. Can send redacted screenshots or 5-min guest access to prove it’s legit. BTC or XMR, escrow cool if you got rep. PM me quick, this won’t sit long. Serious buyers only, don’t waste my time with lowballs.",
+        "type": "seller",
+        "category": "Initial Access"
+    },
+    {
+        "title": "[$4,000] VPN Creds - Major Telecom Pwned [EU] - Old Post Removed",
+        "content": "Back again, mods nuked my last thread. Selling VPN access to a big EU telecom, one of them household names in Germany (you figure it out). Full internal access, you can pivot to servers, grab call logs, or mess with billing systems. Been stable for a month, no kicks. Asking $4,000 BTC, negotiable for bulk buyers (got 2 more telecoms). I’ll throw in logs or a test connection for proof, but only if you’re serious. Escrow or MM accepted, I’m vouched here. Hit me up in PM, let’s make this quick. No skids, please.",
+        "type": "seller",
+        "category": "Initial Access"
+    },
+    {
+        "title": "[HOT] $8,500 AWS Keys - Logistics Giant Full Admin - US",
+        "content": "Listen up, this is a once-in-a-lifetime drop. Got AWS keys with FULL admin access to a major US logistics corp, think one of those ‘we ship everything’ companies. S3 buckets, EC2 instances, IAM policies—you name it, you control it. Ideal for crypto mining, data dumps, or flipping for profit. Priced at $8,500 XMR, worth every cent. I’m including a bucket list and PoC video for legit buyers, no free rides tho. Payment in XMR only, escrow mandatory for first-timers. Been holding this for the right buyer, so PM me NOW if you got the funds. Don’t sleep on this, it’s a goldmine.",
+        "type": "seller",
+        "category": "Initial Access"
+    },
+    {
+        "title": "[$3,500] RDP Access - Healthcare Network Hacked - Canada",
+        "content": "Hey, i sell RDP to healthcare network in Canada, big hospital group in Ontario, wont say name for safety. This give you admin access to servers, patient data, billing, all that good stuff. Very stable, i check everyday, no problem. Price $3,500 BTC or XMR, can do escrow if you new. I show screenshot or small login to prove it real, but only for real buyer. Good for steal data or ransom, you decide. PM me fast, i got other buyer waiting. No cheap offer, this is premium.",
+        "type": "seller",
+        "category": "Initial Access"
+    },
+    {
+        "title": "[$5,000] Citrix Access - Retail Chain Pwned - UK - Repost",
+        "content": "Alright, reposting since last one got taken down. I got Citrix access to a UK retail chain, one of them big department stores you all shop at (no specifics, keep it OPSEC). Full network admin, you can move lateral, hit their POS systems, or grab customer DBs. Been inside for 2 weeks, rock-solid uptime. Asking $5,000 BTC, XMR also fine. Can provide logs, redacted screenshots, or even a quick tour if you got the coin. Escrow or MM for trust, I’m known here. PM me with your offer, but don’t come with no $500 nonsense. Let’s do business.",
+        "type": "seller",
+        "category": "General"
+    },
+    {"title": "Need Help with SQL Injection", "content": "Struggling with SQLi on a target site. Anyone got tips or tools? Willing to pay $50 XMR.", "type": "buyer", "category": "Help Request"},    {"title": "General Discussion: OpSec Tips", "content": "Sharing my OpSec setup: VPN + Tor + burner devices. What's your approach?", "type": "seller", "category": "General"},
     {"title": "Hacked Netflix Accounts", "content": "100+ premium Netflix accounts, $5 each. Bulk discounts available.", "type": "seller", "category": "Account Sales"},
     {"title": "Data Leak - E-commerce DB", "content": "Leaked DB from e-commerce site, 20k user records. $250 XMR.", "type": "seller", "category": "Data Leaks"},
     {"title": "Seeking VPN Access", "content": "Looking for corporate VPN credentials. Budget $400 BTC, escrow OK.", "type": "buyer", "category": "Initial Access"},
@@ -87,7 +114,7 @@ posts = [
     {"title": "Spotify Premium Accounts", "content": "200 Spotify accounts, $3 each, bulk deals.", "type": "seller", "category": "Account Sales"},
     {"title": "Need Help with Phishing", "content": "Setting up a phishing campaign, need templates. $100 XMR.", "type": "buyer", "category": "Help Request"},
     {"title": "Leaked University DB", "content": "10k student records from US university. $200 XMR.", "type": "seller", "category": "Data Leaks"},
-    {"title": "RDP Access - Asia Servers", "content": "High-speed RDP access to Asian servers. $250 BTC.", "type": "seller", "category": "Initial Access"},
+    {"title": "[Royal Bank Canada (RBC)] Limited SMB Access for sale", "content": "I have got limited read/write access to a SMB share of RBC bank Canada, Halton Hills branch. The access is limited so I am selling for $1000, original price was $3000, I will give you a Ubuntu VPS with from where you can access the SMB share. Serious buyers only, LTC & XMR accepted.", "type": "seller", "category": "Initial Access"},
     {"title": "Seeking Botnet Rental", "content": "Need botnet for testing, budget $50/day.", "type": "buyer", "category": "General"},
     {"title": "Custom Malware for Sale", "content": "RAT with advanced features, $500 BTC.", "type": "seller", "category": "General"},
     {"title": "Hacked Social Media Accounts", "content": "100+ Instagram accounts, $8 each.", "type": "seller", "category": "Account Sales"},
