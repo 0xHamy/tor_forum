@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}{{ user.username }}'s Profile{% endblock %}
+{% block content %}
+    <h1 class="title has-text-success">{{ user.username }}'s Profile</h1>
+    <div class="card is-dark">
+        <header class="card-header has-background-dark">
+            <p class="card-header-title has-text-success">User Details</p>
+        </header>
+        <div class="card-content has-text-white">
+            <div class="content">
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Member since:</strong> {{ user.join_date.strftime('%Y-%m-%d') }}</p>
+                <p><strong>Reputation:</strong> {{ user.reputation }}</p>
+                <p><strong>Bio:</strong> {{ user.bio }}</p>
+            </div>
+        </div>
+    </div>
+    <h2 class="subtitle has-text-white mt-5">Posts by {{ user.username }}</h2>
+    <table class="table is-fullwidth is-striped is-dark has-text-white">
+        <thead>
+            <tr>
+                <th class="has-text-white">Title</th>
+                <th class="has-text-white">Category</th>
+                <th class="has-text-white">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
+                <td>{{ post.category.name }}</td>
+                <td>{{ post.date.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+            {% if not posts %}
+            <tr>
+                <td colspan="3">No posts yet.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

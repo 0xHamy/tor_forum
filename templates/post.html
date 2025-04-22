@@ -11,8 +11,10 @@
         </div>
     </div>
     <div class="card is-dark">
-        <header class="card-header has-background-dark">
-            <p class="card-header-title has-text-success">Poster: {{ post.author.username }}</p>
+        <header class="card-header has-background-grey-dark">
+            <p class="card-header-title has-text-success">
+                Poster: <a class="has-text-info ml-2" href="{{ url_for('profile', user_id=post.author.id) }}">{{ post.author.username }}</a>
+            </p>
         </header>
         <div class="card-content has-text-white">
             <div class="content">
@@ -23,7 +25,7 @@
         </div>
     </div>
     <div class="card is-dark">
-        <header class="card-header has-background-dark">
+        <header class="card-header has-background-grey-dark">
             <p class="card-header-title has-text-success">Comments</p>
         </header>
         <div class="card-content has-text-white">
@@ -32,7 +34,7 @@
                 {% for comment in post.comments %}
                 <div class="content">
                     <p>{{ comment.content }}</p>
-                    <p><small>By: {{ comment.author.username }} on {{ comment.date.strftime('%Y-%m-%d %H:%M') }}</small></p>
+                    <p><small>By: <a class="has-text-info" href="{{ url_for('profile', user_id=comment.author.id) }}">{{ comment.author.username }}</a> on {{ comment.date.strftime('%Y-%m-%d %H:%M') }}</small></p>
                 </div>
                 {% endfor %}
                 {% else %}

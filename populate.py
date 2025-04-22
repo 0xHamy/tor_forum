@@ -122,25 +122,26 @@ with app.app_context():
         db.session.add(post)
     db.session.commit()
 
-# Create comments
+
 comments = [
-    "Legit seller, fast delivery!", "Can you provide a sample?", "Interested, sent DM.", 
-    "Vouched, used before.", "What's the uptime?", "Need more details, PM me.", 
-    "Great service, reliable.", "Any discounts for bulk?", "Looks good, checking escrow.",
-    "Worked perfectly, thanks!", "How recent is the data?", "Can you do custom targets?"
-]
+        "Legit seller, fast delivery!", "Can you provide a sample?", "Interested, sent DM.",
+        "Vouched, used before.", "What's the uptime?", "Need more details, PM me.",
+        "Great service, reliable.", "Any discounts for bulk?", "Looks good, checking escrow.",
+        "Worked perfectly, thanks!", "How recent is the data?", "Can you do custom targets?"
+    ]
 
-
-
+# Create comments
 with app.app_context():
     posts = Post.query.all()
+    users = User.query.all()  # Re-query users in the same session
+    
     for post in posts:
         num_comments = random.randint(0, 3)
         for _ in range(num_comments):
             comment = Comment(
                 content=random.choice(comments),
                 date=random_date(),
-                user_id=random.choice(users).id,
+                user_id=random.choice(users).id,  # Now uses attached users
                 post_id=post.id
             )
             db.session.add(comment)
