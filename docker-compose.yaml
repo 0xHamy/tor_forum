@@ -2,29 +2,26 @@ services:
   app:
     build: .
     container_name: flask_app
-    networks:
-      onion_net:
-        ipv4_address: 172.30.0.9
     expose:
       - "5000"
+    volumes:
+      - db-data:/app/instance
+    networks:
+      - onion_net
 
   tor:
     image: osminogin/tor-simple:latest
     container_name: tor_service
     volumes:
       - ./tor/torrc:/etc/tor/torrc
-      - tor-data:/var/lib/tor
     networks:
       - onion_net
     depends_on:
       - app
 
 volumes:
-  tor-data:
+  db-data:
 
 networks:
   onion_net:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.30.0.0/16
