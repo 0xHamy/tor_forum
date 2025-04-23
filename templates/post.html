@@ -2,30 +2,77 @@
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
     <style>
+        /* General layout */
+        .post-container {
+            display: flex;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        /* Sidebar for profile */
+        .profile-sidebar {
+            flex: 0 0 300px;
+            background: linear-gradient(180deg, #1a1a1a, #2c2c2c);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid #00d1b2;
+        }
+
+        .profile-sidebar h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #00d1b2;
+            margin-bottom: 1rem;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .profile-sidebar p {
+            font-size: 0.95rem;
+            color: #dbdbdb;
+            margin-bottom: 0.75rem;
+        }
+
+        .profile-sidebar a {
+            color: #209cee;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .profile-sidebar a:hover {
+            color: #4db8ff;
+            text-decoration: underline;
+        }
+
+        /* Main content area */
+        .post-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Post title */
         .title {
-            font-size: 2rem;
-            font-weight: 600;
+            font-size: 2.25rem;
+            font-weight: 700;
             color: #00d1b2;
+            font-family: 'Fira Code', monospace;
+            text-shadow: 0 0 8px rgba(0, 209, 178, 0.3);
         }
 
+        /* Post and comment cards */
         .card {
-            background-color: #2c2c2c;
-            border-radius: 0.25rem;
-            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-            margin-bottom: 1.25rem;
+            background: #2c2c2c;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid #4a4a4a;
+            transition: transform 0.2s;
         }
 
-        .card-header {
-            background-color: #363636;
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid #4a4a4a;
-        }
-
-        .card-header-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #00d1b2;
-            margin: 0;
+        .card:hover {
+            transform: translateY(-5px);
         }
 
         .card-content {
@@ -33,73 +80,81 @@
             color: #ffffff;
         }
 
-        .content {
-            font-size: 1rem;
-            color: #ffffff;
-        }
-
         .content p {
-            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: #dbdbdb;
+            margin-bottom: 0.75rem;
         }
 
         .content a {
             color: #209cee;
             text-decoration: none;
+            transition: color 0.2s;
         }
 
         .content a:hover {
+            color: #4db8ff;
             text-decoration: underline;
         }
 
         .content small {
-            font-size: 0.875rem;
-            color: #dbdbdb;
+            font-size: 0.85rem;
+            color: #a0a0a0;
         }
 
-        .margin-left-2 {
-            margin-left: 0.5rem;
+        /* Comment section */
+        .comment {
+            border-top: 1px solid #4a4a4a;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .no-comments {
+            font-size: 1rem;
+            color: #a0a0a0;
+            text-align: center;
+            padding: 1rem;
         }
     </style>
 
-    <h1 class="title">{{ post.title }}</h1>
-    <div class="card">
-        <div class="card-content">
-            <div class="content">
-                <p>{{ post.content }}</p>
-                <p><strong>Date:</strong> {{ post.date.strftime('%Y-%m-%d %H:%M') }}</p>
-            </div>
+    <div class="post-container">
+        <!-- Profile Sidebar -->
+        <div class="profile-sidebar">
+            <h3>
+                <a href="{{ url_for('profile', user_id=post.author.id) }}">{{ post.author.username }}</a>
+            </h3>
+            <p><strong>Member since:</strong> {{ post.author.join_date.strftime('%Y-%m-%d') }}</p>
+            <p><strong>Reputation:</strong> {{ post.author.reputation }}</p>
+            <p><strong>Bio:</strong> {{ post.author.bio or 'No bio provided.' }}</p>
         </div>
-    </div>
-    <div class="card">
-        <header class="card-header">
-            <p class="card-header-title">
-                Poster: <a class="margin-left-2" href="{{ url_for('profile', user_id=post.author.id) }}">{{ post.author.username }}</a>
-            </p>
-        </header>
-        <div class="card-content">
-            <div class="content">
-                <p><strong>Member since:</strong> {{ post.author.join_date.strftime('%Y-%m-%d') }}</p>
-                <p><strong>Reputation:</strong> {{ post.author.reputation }}</p>
-                <p><strong>Bio:</strong> {{ post.author.bio }}</p>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <header class="card-header">
-            <p class="card-header-title">Comments</p>
-        </header>
-        <div class="card-content">
-            <div class="content">
-                {% if post.comments %}
-                {% for comment in post.comments %}
-                <div class="content">
-                    <p>{{ comment.content }}</p>
-                    <p><small>By: <a href="{{ url_for('profile', user_id=comment.author.id) }}">{{ comment.author.username }}</a> on {{ comment.date.strftime('%Y-%m-%d %H:%M') }}</small></p>
+
+        <!-- Post and Comments -->
+        <div class="post-content">
+            <h1 class="title">{{ post.title }}</h1>
+            <div class="card">
+                <div class="card-content">
+                    <div class="content">
+                        <p>{{ post.content }}</p>
+                        <p><strong>Date:</strong> {{ post.date.strftime('%Y-%m-%d %H:%M') }}</p>
+                    </div>
                 </div>
-                {% endfor %}
-                {% else %}
-                <p>No comments yet.</p>
-                {% endif %}
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <h2 class="card-header-title">Comments</h2>
+                    <div class="content">
+                        {% if post.comments %}
+                        {% for comment in post.comments %}
+                        <div class="comment">
+                            <p>{{ comment.content }}</p>
+                            <p><small>By: <a href="{{ url_for('profile', user_id=comment.author.id) }}">{{ comment.author.username }}</a> on {{ comment.date.strftime('%Y-%m-%d %H:%M') }}</small></p>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p class="no-comments">No comments yet.</p>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
