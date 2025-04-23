@@ -2,44 +2,94 @@
 {% block title %}General{% endblock %}
 {% block content %}
     <style>
-        .table th:nth-child(1), .table td:nth-child(1) {
-            width: 50%; /* Title or Username column */
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+        .title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #00d1b2;
         }
-        .table th:nth-child(2), .table td:nth-child(2) {
-            width: 30%; /* Category or empty column */
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #ffffff;
         }
-        .table th:nth-child(3), .table td:nth-child(3) {
-            width: 20%; /* Date or Join Date column */
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+
+        .table-container {
+            overflow-x: auto;
         }
+
         .table {
-            table-layout: fixed; /* Ensures fixed column widths */
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #2c2c2c;
+            color: #ffffff;
+            table-layout: fixed;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            text-align: left;
+            color: #ffffff;
+        }
+
+        .table th {
+            font-weight: 600;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #363636;
+        }
+
+        .table a {
+            color: #209cee;
+            text-decoration: none;
+        }
+
+        .table a:hover {
+            text-decoration: underline;
+        }
+
+        .table th:nth-child(1),
+        .table td:nth-child(1) {
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .table th:nth-child(2),
+        .table td:nth-child(2) {
+            width: 30%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .table th:nth-child(3),
+        .table td:nth-child(3) {
+            width: 20%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
     </style>
 
-    <h1 class="title has-text-success">Darknet Forum</h1>
-    <h2 class="subtitle has-text-white">Latest Posts</h2>
+    <h1 class="title">Darknet Forum</h1>
+    <h2 class="subtitle">Latest Posts</h2>
     <div class="table-container">
-        <table class="table is-fullwidth is-striped is-dark has-text-white">
+        <table class="table">
             <thead>
                 <tr>
-                    <th class="has-text-white">Title</th>
-                    <th class="has-text-white">Category</th>
-                    <th class="has-text-white">Date</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
                 {% for post in posts %}
                 <tr>
-                    <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
+                    <td><a href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
                     <td>{{ post.category.name }}</td>
                     <td>{{ post.date.strftime('%Y-%m-%d %H:%M') }}</td>
                 </tr>
@@ -48,21 +98,21 @@
         </table>
     </div>
 
-    <h2 class="subtitle has-text-white">Newest Members</h2>
+    <h2 class="subtitle">Newest Members</h2>
     <div class="table-container">
-        <table class="table is-fullwidth is-striped is-dark has-text-white">
+        <table class="table">
             <thead>
                 <tr>
-                    <th class="has-text-white">Username</th>
-                    <th class="has-text-white"></th> <!-- Empty column to match Latest Posts table -->
-                    <th class="has-text-white">Join Date</th>
+                    <th>Username</th>
+                    <th></th>
+                    <th>Join Date</th>
                 </tr>
             </thead>
             <tbody>
                 {% for member in members %}
                 <tr>
-                    <td><a class="has-text-info" href="{{ url_for('profile', user_id=member.id) }}" target="_blank">{{ member.username }}</a></td>
-                    <td></td> <!-- Empty cell to align with Latest Posts table -->
+                    <td><a href="{{ url_for('profile', user_id=member.id) }}" target="_blank">{{ member.username }}</a></td>
+                    <td></td>
                     <td>{{ member.join_date.strftime('%Y-%m-%d') }}</td>
                 </tr>
                 {% endfor %}

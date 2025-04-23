@@ -1,16 +1,125 @@
 {% extends 'base.html' %}
 {% block title %}Sellers{% endblock %}
 {% block content %}
-    <h1 class="title has-text-success">Marketplace - Sellers</h1>
-    <form method="GET" class="box is-dark has-background-grey-dark">
+    <style>
+        .title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #00d1b2;
+        }
+
+        .box {
+            background-color: #363636;
+            border-radius: 0.25rem;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .field {
+            margin-bottom: 1rem;
+        }
+
+        .label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .control {
+            display: block;
+        }
+
+        .input,
+        .select select {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #4a4a4a;
+            border-radius: 0.25rem;
+            background-color: #2c2c2c;
+            color: #ffffff;
+        }
+
+        .select {
+            display: block;
+            width: 100%;
+        }
+
+        .select select:focus,
+        .input:focus {
+            outline: none;
+            border-color: #209cee;
+            box-shadow: 0 0 0 0.125rem rgba(32, 156, 238, 0.25);
+        }
+
+        .field-grouped {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            background-color: #209cee;
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .button:hover {
+            background-color: #1a8cd8;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #2c2c2c;
+            color: #ffffff;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            text-align: left;
+            color: #ffffff;
+        }
+
+        .table th {
+            font-weight: 600;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #363636;
+        }
+
+        .table a {
+            color: #209cee;
+            text-decoration: none;
+        }
+
+        .table a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <h1 class="title">Marketplace - Sellers</h1>
+    <form method="GET" class="box">
         <div class="field">
-            <label class="label has-text-white">Search by Title</label>
+            <label class="label">Search by Title</label>
             <div class="control">
                 <input class="input" type="text" name="title" value="{{ title }}" placeholder="Enter post title">
             </div>
         </div>
         <div class="field">
-            <label class="label has-text-white">Filter by Category</label>
+            <label class="label">Filter by Category</label>
             <div class="control">
                 <div class="select">
                     <select name="category">
@@ -22,34 +131,34 @@
                 </div>
             </div>
         </div>
-        <div class="field is-grouped">
+        <div class="field field-grouped">
             <div class="control">
-                <label class="label has-text-white">Start Date</label>
+                <label class="label">Start Date</label>
                 <input class="input" type="date" name="start_date" value="{{ start_date }}">
             </div>
             <div class="control">
-                <label class="label has-text-white">End Date</label>
+                <label class="label">End Date</label>
                 <input class="input" type="date" name="end_date" value="{{ end_date }}">
             </div>
         </div>
         <div class="field">
             <div class="control">
-                <button class="button is-link" type="submit">Search</button>
+                <button class="button" type="submit">Search</button>
             </div>
         </div>
     </form>
-    <table class="table is-fullwidth is-striped is-dark has-text-white">
+    <table class="table">
         <thead>
             <tr>
-                <th class="has-text-white">Title</th>
-                <th class="has-text-white">Category</th>
-                <th class="has-text-white">Date</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>
             {% for post in posts %}
             <tr>
-                <td><a class="has-text-info" href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
+                <td><a href="{{ url_for('post_detail', post_id=post.id) }}" target="_blank">{{ post.title }}</a></td>
                 <td>{{ post.category.name }}</td>
                 <td>{{ post.date.strftime('%Y-%m-%d %H:%M') }}</td>
             </tr>
