@@ -112,6 +112,6 @@ For local development without Docker:
 - This is a simulation and should not be used for illegal activities
 - Docker commands may require sudo depending on your system
 - Ensure Tor Browser is installed for onion access
-- Database is reset when using docker-compose down -v
+- Database is reset when using `docker-compose down -v`
 
 
