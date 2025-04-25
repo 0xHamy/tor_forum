@@ -1,6 +1,9 @@
+![Project Logo](./marketplace.png)
+
 # Darknet Simulation Forum
 
 This Flask-based web application simulates a darknet forum, featuring user profiles, categorized posts, comments, and a marketplace for buyer and seller listings. It uses SQLite for data storage and integrates with Tor for anonymous access via onion routing. The application is containerized with Docker and orchestrated using Docker Compose.
+
 
 
 
